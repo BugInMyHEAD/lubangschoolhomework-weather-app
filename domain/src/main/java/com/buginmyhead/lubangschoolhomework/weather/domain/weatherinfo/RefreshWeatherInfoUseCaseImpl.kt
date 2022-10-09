@@ -6,10 +6,10 @@ import io.reactivex.rxjava3.core.SingleObserver
 import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.schedulers.Schedulers
 
-class ShowInitialWeatherInfoUseCaseImpl(
+class RefreshWeatherInfoUseCaseImpl(
     private val weatherInfoRepository: ReadOnlyRepository<WeatherInfo>,
     private val viewController: ViewController<WeatherInfo, WeatherInfoLoading, WeatherInfoFailure>
-) : ShowInitialWeatherInfoUseCase {
+) : RefreshWeatherInfoUseCase {
 
     override fun invoke() {
         weatherInfoRepository.value

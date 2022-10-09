@@ -12,16 +12,16 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Test
 
-class ShowInitialWeatherInfoUseCaseImplTest {
+class RefreshWeatherInfoUseCaseImplTest {
 
     private val weatherInfoRepository: ReadOnlyRepository<WeatherInfo> = mockk()
     private val viewController: ViewController<WeatherInfo, WeatherInfoLoading, WeatherInfoFailure> = mockk(relaxUnitFun = true)
 
-    private lateinit var showInitialWeatherInfoUseCase: ShowInitialWeatherInfoUseCase
+    private lateinit var refreshWeatherInfoUseCase: RefreshWeatherInfoUseCase
 
     @Before
     fun setUp() {
-        showInitialWeatherInfoUseCase = ShowInitialWeatherInfoUseCaseImpl(
+        refreshWeatherInfoUseCase = RefreshWeatherInfoUseCaseImpl(
             weatherInfoRepository = weatherInfoRepository,
             viewController = viewController,
         )
@@ -37,7 +37,7 @@ class ShowInitialWeatherInfoUseCaseImplTest {
         val weatherInfo = WeatherInfo()
         every { weatherInfoRepository.value } returns Single.just(weatherInfo)
 
-        showInitialWeatherInfoUseCase()
+        refreshWeatherInfoUseCase()
 
         verifyOrder {
             viewController.switchToLoading(WeatherInfoLoading)
@@ -49,7 +49,7 @@ class ShowInitialWeatherInfoUseCaseImplTest {
     fun `verify failure`() {
         every { weatherInfoRepository.value } returns Single.error(Exception())
 
-        showInitialWeatherInfoUseCase()
+        refreshWeatherInfoUseCase()
 
         verifyOrder {
             viewController.switchToLoading(WeatherInfoLoading)
