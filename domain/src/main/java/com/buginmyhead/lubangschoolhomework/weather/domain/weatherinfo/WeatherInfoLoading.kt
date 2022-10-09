@@ -1,0 +1,3 @@
+package com.buginmyhead.lubangschoolhomework.weather.domain.weatherinfo
+
+object WeatherInfoLoading
