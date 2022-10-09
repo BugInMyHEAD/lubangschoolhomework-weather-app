@@ -12,9 +12,9 @@ sealed class ViewData<S, L, F> {
         is Failure -> handler.onFailure(failure)
     }
 
-    interface Presenter<T, L, F> {
+    interface Presenter<S, L, F> {
 
-        fun onSuccess(data: T)
+        fun onSuccess(data: S)
         fun onLoading(data: L)
         fun onFailure(data: F)
 
