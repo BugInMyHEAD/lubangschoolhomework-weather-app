@@ -14,7 +14,7 @@ class WeatherInfoRepositoryImpl(
 
     private fun WeatherInfoRemoteDataSource.Dto.toDomainModel() = WeatherInfo(
         yesterdayTemperature = Temparature(0F),
-        todayTemparature = Temparature(0F),
+        todayTemperature = Temparature(0F),
         rainfallProbability = Probability.orNull(0.5F),
     )
 

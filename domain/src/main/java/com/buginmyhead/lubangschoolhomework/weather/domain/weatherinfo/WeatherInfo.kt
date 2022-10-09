@@ -5,6 +5,6 @@ import com.buginmyhead.lubangschoolhomework.weather.domain.fundamental.Temparatu
 
 data class WeatherInfo(
     val yesterdayTemperature: Temparature? = null,
-    val todayTemparature: Temparature? = null,
+    val todayTemperature: Temparature? = null,
     val rainfallProbability: Probability? = null,
 )
