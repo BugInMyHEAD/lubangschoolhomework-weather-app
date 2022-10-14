@@ -25,7 +25,7 @@ class RefreshWeatherInfoUseCaseImpl(
                 }
 
                 override fun onError(e: Throwable) {
-                    viewController.switchToFailure(WeatherInfoFailure.NETWORK_ERROR)
+                    viewController.switchToFailure(WeatherInfoFailure)
                 }
 
             })
