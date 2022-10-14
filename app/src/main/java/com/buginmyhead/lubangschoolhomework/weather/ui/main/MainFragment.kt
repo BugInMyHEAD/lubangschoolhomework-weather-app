@@ -7,9 +7,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.buginmyhead.lubangschoolhomework.weather.R
 import com.buginmyhead.lubangschoolhomework.weather.databinding.FragmentMainBinding
-import com.buginmyhead.lubangschoolhomework.weather.domain.architecture.ViewData
+import com.buginmyhead.lubangschoolhomework.weather.domain.architecture.ViewState
 import com.buginmyhead.lubangschoolhomework.weather.domain.weatherinfo.WeatherInfo
 import com.buginmyhead.lubangschoolhomework.weather.domain.weatherinfo.WeatherInfoFailure
 import com.buginmyhead.lubangschoolhomework.weather.domain.weatherinfo.WeatherInfoLoading
@@ -34,7 +33,7 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val viewDataPresenter = object : ViewData.Presenter<WeatherInfo, WeatherInfoLoading, WeatherInfoFailure> {
+        val viewStatePresenter = object : ViewState.Presenter<WeatherInfo, WeatherInfoLoading, WeatherInfoFailure> {
 
             override fun onSuccess(data: WeatherInfo) {
                 binding.message.text = data.toString()
@@ -50,7 +49,7 @@ class MainFragment : Fragment() {
 
         }
         viewModel.weatherInfoLiveData.observe(viewLifecycleOwner) {
-            it.showState(viewDataPresenter)
+            it.showState(viewStatePresenter)
         }
 
         binding.root.setOnClickListener {

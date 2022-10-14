@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.buginmyhead.lubangschoolhomework.weather.data.weatherinfo.WeatherInfoRemoteDataSourceDummyImpl
 import com.buginmyhead.lubangschoolhomework.weather.data.weatherinfo.WeatherInfoRepositoryImpl
 import com.buginmyhead.lubangschoolhomework.weather.domain.architecture.ViewController
-import com.buginmyhead.lubangschoolhomework.weather.domain.architecture.ViewData
+import com.buginmyhead.lubangschoolhomework.weather.domain.architecture.ViewState
 import com.buginmyhead.lubangschoolhomework.weather.domain.weatherinfo.RefreshWeatherInfoUseCase
 import com.buginmyhead.lubangschoolhomework.weather.domain.weatherinfo.RefreshWeatherInfoUseCaseImpl
 import com.buginmyhead.lubangschoolhomework.weather.domain.weatherinfo.WeatherInfo
@@ -29,12 +29,12 @@ class MainViewModel : ViewModel() {
         viewController = weatherInfoViewController,
     )
 
-    private val _weatherInfoLiveData = MutableLiveData<ViewData<WeatherInfo, WeatherInfoLoading, WeatherInfoFailure>>().apply {
+    private val _weatherInfoLiveData = MutableLiveData<ViewState<WeatherInfo, WeatherInfoLoading, WeatherInfoFailure>>().apply {
         compositeDisposable.add(weatherInfoViewController.state.subscribe {
             postValue(it)
         })
     }
-    val weatherInfoLiveData: LiveData<ViewData<WeatherInfo, WeatherInfoLoading, WeatherInfoFailure>>
+    val weatherInfoLiveData: LiveData<ViewState<WeatherInfo, WeatherInfoLoading, WeatherInfoFailure>>
         get() = _weatherInfoLiveData
 
     init {

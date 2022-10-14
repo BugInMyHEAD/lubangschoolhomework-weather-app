@@ -4,7 +4,7 @@ import io.reactivex.rxjava3.subjects.Subject
 
 interface ViewController<S, L, F> : ViewOutput<S, L, F> {
 
-    override val state: Subject<ViewData<S, L, F>>
+    override val state: Subject<ViewState<S, L, F>>
 
     fun switchToSuccess(data: S) {
         state.onNext(Success(data))
