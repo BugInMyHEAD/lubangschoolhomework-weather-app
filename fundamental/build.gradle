@@ -9,9 +9,6 @@ java {
 }
 
 dependencies {
-	api project(':fundamental')
-	api 'io.reactivex.rxjava3:rxjava:3.1.5'
-
 	testApi 'junit:junit:4.13.2'
 	testApi 'io.mockk:mockk:1.13.2'
 }

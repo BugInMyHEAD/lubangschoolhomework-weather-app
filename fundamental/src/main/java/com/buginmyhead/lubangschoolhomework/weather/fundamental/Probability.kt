@@ -1,4 +1,4 @@
-package com.buginmyhead.lubangschoolhomework.weather.domain.fundamental
+package com.buginmyhead.lubangschoolhomework.weather.fundamental
 
 @JvmInline
 value class Probability private constructor(val value: Float) {
