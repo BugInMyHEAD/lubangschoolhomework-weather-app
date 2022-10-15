@@ -38,8 +38,7 @@ android {
 }
 
 dependencies {
-	implementation project(':domain')
-
+	implementation project(':domain-weatherinfo')
 	implementation 'androidx.core:core-ktx:1.8.0'  // 1.9.0 needs AGP 7.3.0, which also requires newer Android Studio
 	implementation 'androidx.appcompat:appcompat:1.5.1'
 	implementation 'com.google.android.material:material:1.6.1'
