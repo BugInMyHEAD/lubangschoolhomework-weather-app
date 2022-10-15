@@ -7,8 +7,8 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.buginmyhead.lubangschoolhomework.weather.data.weatherinfo.WeatherInfoRemoteDataSourceDummyImpl
 import com.buginmyhead.lubangschoolhomework.weather.data.weatherinfo.WeatherInfoRepositoryImpl
-import com.buginmyhead.lubangschoolhomework.weather.domain.architecture.ViewController
-import com.buginmyhead.lubangschoolhomework.weather.domain.architecture.ViewState
+import com.buginmyhead.lubangschoolhomework.weather.architecture.ViewController
+import com.buginmyhead.lubangschoolhomework.weather.architecture.ViewState
 import com.buginmyhead.lubangschoolhomework.weather.domain.weatherinfo.RefreshWeatherInfoUseCase
 import com.buginmyhead.lubangschoolhomework.weather.domain.weatherinfo.RefreshWeatherInfoUseCaseImpl
 import com.buginmyhead.lubangschoolhomework.weather.domain.weatherinfo.WeatherInfo

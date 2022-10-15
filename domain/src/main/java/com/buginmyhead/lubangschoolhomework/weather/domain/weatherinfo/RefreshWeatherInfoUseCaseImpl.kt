@@ -1,7 +1,7 @@
 package com.buginmyhead.lubangschoolhomework.weather.domain.weatherinfo
 
-import com.buginmyhead.lubangschoolhomework.weather.domain.architecture.ReadOnlyRepository
-import com.buginmyhead.lubangschoolhomework.weather.domain.architecture.ViewController
+import com.buginmyhead.lubangschoolhomework.weather.architecture.ReadOnlyRepository
+import com.buginmyhead.lubangschoolhomework.weather.architecture.ViewController
 import io.reactivex.rxjava3.core.SingleObserver
 import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.schedulers.Schedulers

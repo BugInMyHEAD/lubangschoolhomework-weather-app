@@ -1,6 +1,6 @@
 package com.buginmyhead.lubangschoolhomework.weather.data.weatherinfo
 
-import com.buginmyhead.lubangschoolhomework.weather.domain.architecture.ReadOnlyRepository
+import com.buginmyhead.lubangschoolhomework.weather.architecture.ReadOnlyRepository
 import com.buginmyhead.lubangschoolhomework.weather.fundamental.Probability
 import com.buginmyhead.lubangschoolhomework.weather.fundamental.Temparature
 import com.buginmyhead.lubangschoolhomework.weather.domain.weatherinfo.WeatherInfo

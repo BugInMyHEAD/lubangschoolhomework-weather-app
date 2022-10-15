@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.buginmyhead.lubangschoolhomework.weather.databinding.FragmentMainBinding
-import com.buginmyhead.lubangschoolhomework.weather.domain.architecture.ViewState
+import com.buginmyhead.lubangschoolhomework.weather.architecture.ViewState
 import com.buginmyhead.lubangschoolhomework.weather.domain.weatherinfo.WeatherInfo
 import com.buginmyhead.lubangschoolhomework.weather.domain.weatherinfo.WeatherInfoFailure
 import com.buginmyhead.lubangschoolhomework.weather.domain.weatherinfo.WeatherInfoLoading

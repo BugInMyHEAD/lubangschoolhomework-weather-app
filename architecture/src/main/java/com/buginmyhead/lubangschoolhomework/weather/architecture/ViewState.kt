@@ -1,4 +1,4 @@
-package com.buginmyhead.lubangschoolhomework.weather.domain.architecture
+package com.buginmyhead.lubangschoolhomework.weather.architecture
 
 sealed class ViewState<S, L, F> {
 
