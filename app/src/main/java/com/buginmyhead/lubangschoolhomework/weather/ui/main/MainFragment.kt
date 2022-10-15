@@ -1,12 +1,11 @@
 package com.buginmyhead.lubangschoolhomework.weather.ui.main
 
-import android.content.Context
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import com.buginmyhead.lubangschoolhomework.weather.databinding.FragmentMainBinding
 import com.buginmyhead.lubangschoolhomework.weather.domain.architecture.ViewState
 import com.buginmyhead.lubangschoolhomework.weather.domain.weatherinfo.WeatherInfo
@@ -15,15 +14,10 @@ import com.buginmyhead.lubangschoolhomework.weather.domain.weatherinfo.WeatherIn
 
 class MainFragment : Fragment() {
 
-    private lateinit var viewModel: MainViewModel
+    private val viewModel: MainViewModel by viewModels { MainViewModel.factory }
 
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
-    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentMainBinding.inflate(inflater, container, false)
