@@ -30,7 +30,7 @@ class MainViewModel : ViewModel() {
     )
 
     private val _weatherInfoLiveData = MutableLiveData<ViewState<WeatherInfo, WeatherInfoLoading, WeatherInfoFailure>>().apply {
-        compositeDisposable.add(weatherInfoViewController.state.subscribe {
+        compositeDisposable.add(weatherInfoViewController.output.subscribe {
             postValue(it)
         })
     }

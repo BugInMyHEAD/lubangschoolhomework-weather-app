@@ -1,21 +1,13 @@
 package com.buginmyhead.lubangschoolhomework.weather.domain.architecture
 
-import io.reactivex.rxjava3.subjects.Subject
+import io.reactivex.rxjava3.core.Observable
 
-interface ViewController<S, L, F> : ViewOutput<S, L, F> {
+interface ViewController<S, L, F> {
 
-    override val state: Subject<ViewState<S, L, F>>
+    val output: Observable<ViewState<S, L, F>>
 
-    fun switchToSuccess(data: S) {
-        state.onNext(Success(data))
-    }
-
-    fun switchToLoading(data: L) {
-        state.onNext(Loading(data))
-    }
-
-    fun switchToFailure(data: F) {
-        state.onNext(Failure(data))
-    }
+    fun switchToSuccess(data: S)
+    fun switchToLoading(data: L)
+    fun switchToFailure(data: F)
 
 }
