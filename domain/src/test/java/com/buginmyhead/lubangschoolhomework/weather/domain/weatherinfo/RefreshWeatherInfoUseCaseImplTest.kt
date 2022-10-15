@@ -1,7 +1,7 @@
 package com.buginmyhead.lubangschoolhomework.weather.domain.weatherinfo
 
-import com.buginmyhead.lubangschoolhomework.weather.domain.architecture.ReadOnlyRepository
-import com.buginmyhead.lubangschoolhomework.weather.domain.architecture.ViewController
+import com.buginmyhead.lubangschoolhomework.weather.architecture.ReadOnlyRepository
+import com.buginmyhead.lubangschoolhomework.weather.architecture.ViewController
 import io.mockk.clearAllMocks
 import io.mockk.every
 import io.mockk.mockk
@@ -53,7 +53,7 @@ class RefreshWeatherInfoUseCaseImplTest {
 
         verifyOrder {
             viewController.switchToLoading(WeatherInfoLoading)
-            viewController.switchToFailure(WeatherInfoFailure.NETWORK_ERROR)
+            viewController.switchToFailure(WeatherInfoFailure)
         }
     }
 
