@@ -5,7 +5,7 @@ import io.reactivex.rxjava3.core.Single
 import java.time.LocalDate
 import java.util.concurrent.TimeUnit
 
-class WeatherInfoRemoteDataSourceDummyImpl : WeatherInfoRemoteDataSource {
+object WeatherInfoRemoteDataSourceDummyImpl : WeatherInfoRemoteDataSource {
 
     override fun get(
         dates: Iterable<LocalDate>,

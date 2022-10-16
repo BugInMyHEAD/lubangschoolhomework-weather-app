@@ -53,7 +53,7 @@ class MainViewModel(
 
         private val refreshWeatherInfoUseCase: RefreshWeatherInfoUseCase = RefreshWeatherInfoUseCaseImpl(
             weatherInfoRepository = WeatherInfoRepositoryImpl(
-                remoteDataSource = WeatherInfoRemoteDataSourceDummyImpl()
+                remoteDataSource = WeatherInfoRemoteDataSourceDummyImpl
             ),
             viewController = weatherInfoViewController,
         )
