@@ -15,10 +15,13 @@ import com.buginmyhead.lubangschoolhomework.weather.domain.weatherinfo.WeatherIn
 import com.buginmyhead.lubangschoolhomework.weather.domain.weatherinfo.WeatherInfoFailure
 import com.buginmyhead.lubangschoolhomework.weather.domain.weatherinfo.WeatherInfoLoading
 import com.buginmyhead.lubangschoolhomework.weather.domain.weatherinfo.WeatherInfoViewControllerImpl
+import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.disposables.CompositeDisposable
+import javax.inject.Inject
 
-class MainViewModel(
+@HiltViewModel
+class MainViewModel @Inject constructor(
     private val refreshWeatherInfoUseCase: RefreshWeatherInfoUseCase,
     private val weatherInfoOutput: Observable<ViewState<WeatherInfo, WeatherInfoLoading, WeatherInfoFailure>>,
 ) : ViewModel() {

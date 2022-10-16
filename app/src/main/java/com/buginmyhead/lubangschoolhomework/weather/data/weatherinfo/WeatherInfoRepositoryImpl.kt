@@ -7,8 +7,9 @@ import com.buginmyhead.lubangschoolhomework.weather.fundamental.Temparature
 import com.buginmyhead.lubangschoolhomework.weather.fundamental.Wgs84Coordinate
 import io.reactivex.rxjava3.core.Single
 import java.time.LocalDate
+import javax.inject.Inject
 
-class WeatherInfoRepositoryImpl(
+class WeatherInfoRepositoryImpl @Inject constructor(
     private val remoteDataSource: WeatherInfoRemoteDataSource
 ) : ReadOnlyRepository<WeatherInfo> {
 

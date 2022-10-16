@@ -5,8 +5,9 @@ import com.buginmyhead.lubangschoolhomework.weather.architecture.ViewController
 import io.reactivex.rxjava3.core.SingleObserver
 import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.schedulers.Schedulers
+import javax.inject.Inject
 
-class RefreshWeatherInfoUseCaseImpl(
+class RefreshWeatherInfoUseCaseImpl @Inject constructor(
     private val weatherInfoRepository: ReadOnlyRepository<WeatherInfo>,
     private val viewController: ViewController<WeatherInfo, WeatherInfoLoading, WeatherInfoFailure>
 ) : RefreshWeatherInfoUseCase {
