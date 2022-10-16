@@ -37,8 +37,8 @@ class WeatherInfoRepositoryImplTest {
         val testObserver = weatherInfoRepository.value.test()
 
         testObserver.assertValue(WeatherInfo(
-            yesterdayTemperature = Temparature(0F),
-            todayTemperature = Temparature(0F),
+            yesterdayMinTemperature = Temparature(0F),
+            todayMinTemperature = Temparature(0F),
             rainfallProbability = Probability.orNull(0.5F),
         ))
     }

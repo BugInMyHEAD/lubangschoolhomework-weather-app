@@ -25,6 +25,7 @@ android {
 		}
 	}
 	compileOptions {
+		coreLibraryDesugaringEnabled true
 		sourceCompatibility JavaVersion.VERSION_1_8
 		targetCompatibility JavaVersion.VERSION_1_8
 	}
@@ -54,6 +55,8 @@ dependencies {
 	// Hilt
 	implementation "com.google.dagger:hilt-android:$hiltVersion"
 	kapt "com.google.dagger:hilt-compiler:$hiltVersion"
+
+	coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.2.0'
 
 	testApi 'junit:junit:4.13.2'
 	testApi 'io.mockk:mockk:1.13.2'
