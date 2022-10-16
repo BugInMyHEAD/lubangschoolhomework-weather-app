@@ -25,12 +25,12 @@ class WeatherInfoRepositoryImpl @Inject constructor(
     )
 
     private fun WeatherInfoRemoteDataSource.Dto.toDomainModel() = WeatherInfo(
-        yesterdayMinTemperature = Temperature(0F),
-        yesterdayMaxTemperature = Temperature(10F),
-        todayMinTemperature = Temperature(0F),
-        todayMaxTemperature = Temperature(10F),
-        tomorrowMinTemperature = Temperature(0F),
-        tomorrowMaxTemperature = Temperature(10F),
+        yesterdayMinTemperature = Temperature.fromCelsius(0F),
+        yesterdayMaxTemperature = Temperature.fromCelsius(10F),
+        todayMinTemperature = Temperature.fromCelsius(0F),
+        todayMaxTemperature = Temperature.fromCelsius(10F),
+        tomorrowMinTemperature = Temperature.fromCelsius(0F),
+        tomorrowMaxTemperature = Temperature.fromCelsius(10F),
         rainfallProbability = Probability.orNull(0.5F),
     )
 

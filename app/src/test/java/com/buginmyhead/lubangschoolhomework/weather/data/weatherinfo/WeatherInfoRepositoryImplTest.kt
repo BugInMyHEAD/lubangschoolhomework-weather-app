@@ -1,9 +1,9 @@
 package com.buginmyhead.lubangschoolhomework.weather.data.weatherinfo
 
 import com.buginmyhead.lubangschoolhomework.weather.architecture.ReadOnlyRepository
+import com.buginmyhead.lubangschoolhomework.weather.domain.weatherinfo.WeatherInfo
 import com.buginmyhead.lubangschoolhomework.weather.fundamental.Probability
 import com.buginmyhead.lubangschoolhomework.weather.fundamental.Temperature
-import com.buginmyhead.lubangschoolhomework.weather.domain.weatherinfo.WeatherInfo
 import io.mockk.clearAllMocks
 import io.mockk.every
 import io.mockk.mockk
@@ -32,13 +32,22 @@ class WeatherInfoRepositoryImplTest {
 
     @Test
     fun `verify value`() {
-        every { remoteDataSource.get() } returns Single.just(WeatherInfoRemoteDataSource.Dto())
+        every {
+            remoteDataSource.get(
+                dates = any(),
+                wgs84Coordinate = any(),
+            )
+        } returns Single.just(WeatherInfoRemoteDataSource.Dto())
 
         val testObserver = weatherInfoRepository.value.test()
 
         testObserver.assertValue(WeatherInfo(
-            yesterdayMinTemperature = Temperature(0F),
-            todayMinTemperature = Temperature(0F),
+            yesterdayMinTemperature = Temperature.fromCelsius(0F),
+            yesterdayMaxTemperature = Temperature.fromCelsius(10F),
+            todayMinTemperature = Temperature.fromCelsius(0F),
+            todayMaxTemperature = Temperature.fromCelsius(10F),
+            tomorrowMinTemperature = Temperature.fromCelsius(0F),
+            tomorrowMaxTemperature = Temperature.fromCelsius(10F),
             rainfallProbability = Probability.orNull(0.5F),
         ))
     }
