@@ -3,6 +3,7 @@ plugins {
 	id 'org.jetbrains.kotlin.android'
 	id 'com.google.dagger.hilt.android'
 	id 'kotlin-kapt'
+	id 'org.jetbrains.kotlin.plugin.serialization'
 }
 
 android {
@@ -40,6 +41,8 @@ android {
 
 dependencies {
 	implementation project(':domain-weatherinfo')
+
+	implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.0"
 
 	implementation 'androidx.core:core-ktx:1.8.0'  // 1.9.0 needs AGP 7.3.0, which also requires newer Android Studio
 	implementation 'androidx.appcompat:appcompat:1.5.1'
