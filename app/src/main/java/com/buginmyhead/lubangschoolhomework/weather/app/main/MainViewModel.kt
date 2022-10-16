@@ -1,4 +1,4 @@
-package com.buginmyhead.lubangschoolhomework.weather.ui.main
+package com.buginmyhead.lubangschoolhomework.weather.app.main
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

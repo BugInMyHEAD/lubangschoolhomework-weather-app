@@ -1,4 +1,4 @@
-package com.buginmyhead.lubangschoolhomework.weather
+package com.buginmyhead.lubangschoolhomework.weather.app
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

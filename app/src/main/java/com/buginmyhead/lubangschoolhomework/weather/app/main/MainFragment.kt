@@ -1,4 +1,4 @@
-package com.buginmyhead.lubangschoolhomework.weather.ui.main
+package com.buginmyhead.lubangschoolhomework.weather.app.main
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import com.buginmyhead.lubangschoolhomework.weather.databinding.FragmentMainBinding
+import com.buginmyhead.lubangschoolhomework.weather.app.databinding.FragmentMainBinding
 import com.buginmyhead.lubangschoolhomework.weather.architecture.ViewState
 import com.buginmyhead.lubangschoolhomework.weather.domain.weatherinfo.WeatherInfo
 import com.buginmyhead.lubangschoolhomework.weather.domain.weatherinfo.WeatherInfoFailure

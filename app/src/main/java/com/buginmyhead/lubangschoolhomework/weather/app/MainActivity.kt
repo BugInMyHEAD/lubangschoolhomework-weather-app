@@ -1,8 +1,9 @@
-package com.buginmyhead.lubangschoolhomework.weather
+package com.buginmyhead.lubangschoolhomework.weather.app
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.buginmyhead.lubangschoolhomework.weather.ui.main.MainFragment
+import com.buginmyhead.lubangschoolhomework.weather.app.R
+import com.buginmyhead.lubangschoolhomework.weather.app.main.MainFragment
 
 class MainActivity : AppCompatActivity() {
 
