@@ -3,7 +3,7 @@ package com.buginmyhead.lubangschoolhomework.weather.data.weatherinfo
 import com.buginmyhead.lubangschoolhomework.weather.architecture.ReadOnlyRepository
 import com.buginmyhead.lubangschoolhomework.weather.domain.weatherinfo.WeatherInfo
 import com.buginmyhead.lubangschoolhomework.weather.fundamental.Probability
-import com.buginmyhead.lubangschoolhomework.weather.fundamental.Temparature
+import com.buginmyhead.lubangschoolhomework.weather.fundamental.Temperature
 import com.buginmyhead.lubangschoolhomework.weather.fundamental.Wgs84Coordinate
 import io.reactivex.rxjava3.core.Single
 import java.time.LocalDate
@@ -25,12 +25,12 @@ class WeatherInfoRepositoryImpl @Inject constructor(
     )
 
     private fun WeatherInfoRemoteDataSource.Dto.toDomainModel() = WeatherInfo(
-        yesterdayMinTemperature = Temparature(0F),
-        yesterdayMaxTemperature = Temparature(10F),
-        todayMinTemperature = Temparature(0F),
-        todayMaxTemperature = Temparature(10F),
-        tomorrowMinTemperature = Temparature(0F),
-        tomorrowMaxTemperature = Temparature(10F),
+        yesterdayMinTemperature = Temperature(0F),
+        yesterdayMaxTemperature = Temperature(10F),
+        todayMinTemperature = Temperature(0F),
+        todayMaxTemperature = Temperature(10F),
+        tomorrowMinTemperature = Temperature(0F),
+        tomorrowMaxTemperature = Temperature(10F),
         rainfallProbability = Probability.orNull(0.5F),
     )
 

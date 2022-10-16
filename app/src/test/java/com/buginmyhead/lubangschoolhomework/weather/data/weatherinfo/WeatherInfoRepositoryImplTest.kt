@@ -2,7 +2,7 @@ package com.buginmyhead.lubangschoolhomework.weather.data.weatherinfo
 
 import com.buginmyhead.lubangschoolhomework.weather.architecture.ReadOnlyRepository
 import com.buginmyhead.lubangschoolhomework.weather.fundamental.Probability
-import com.buginmyhead.lubangschoolhomework.weather.fundamental.Temparature
+import com.buginmyhead.lubangschoolhomework.weather.fundamental.Temperature
 import com.buginmyhead.lubangschoolhomework.weather.domain.weatherinfo.WeatherInfo
 import io.mockk.clearAllMocks
 import io.mockk.every
@@ -37,8 +37,8 @@ class WeatherInfoRepositoryImplTest {
         val testObserver = weatherInfoRepository.value.test()
 
         testObserver.assertValue(WeatherInfo(
-            yesterdayMinTemperature = Temparature(0F),
-            todayMinTemperature = Temparature(0F),
+            yesterdayMinTemperature = Temperature(0F),
+            todayMinTemperature = Temperature(0F),
             rainfallProbability = Probability.orNull(0.5F),
         ))
     }
