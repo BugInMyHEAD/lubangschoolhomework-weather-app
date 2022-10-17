@@ -21,7 +21,7 @@ android {
 
 	buildTypes {
 		release {
-			minifyEnabled false
+			minifyEnabled true
 			proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
 		}
 	}
@@ -42,7 +42,8 @@ android {
 dependencies {
 	implementation project(':domain-weatherinfo')
 
-	implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.0"
+	implementation 'org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.0'
+	implementation 'com.squareup.retrofit2:retrofit:2.9.0'
 
 	implementation 'androidx.core:core-ktx:1.8.0'  // 1.9.0 needs AGP 7.3.0, which also requires newer Android Studio
 	implementation 'androidx.appcompat:appcompat:1.5.1'
