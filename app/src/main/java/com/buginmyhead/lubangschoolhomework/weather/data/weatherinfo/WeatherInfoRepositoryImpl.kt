@@ -4,7 +4,6 @@ import com.buginmyhead.lubangschoolhomework.weather.architecture.ReadOnlyReposit
 import com.buginmyhead.lubangschoolhomework.weather.domain.weatherinfo.WeatherInfo
 import com.buginmyhead.lubangschoolhomework.weather.fundamental.Probability
 import com.buginmyhead.lubangschoolhomework.weather.fundamental.Temperature
-import com.buginmyhead.lubangschoolhomework.weather.fundamental.Wgs84Coordinate
 import io.reactivex.rxjava3.core.Single
 import java.time.LocalDate
 import javax.inject.Inject
@@ -13,24 +12,27 @@ class WeatherInfoRepositoryImpl @Inject constructor(
     private val remoteDataSource: WeatherInfoRemoteDataSource
 ) : ReadOnlyRepository<WeatherInfo> {
 
-    override val value: Single<WeatherInfo> get() = remoteDataSource
-        .get(
-            dates = LocalDate.now().oneDayBackAndForth(),
-            wgs84Coordinate = Wgs84Coordinate(37.5139F, 126.9828F),
-        )
+    override val value: Single<WeatherInfo> get() = OpenMeteo.RemoteDataSource
+        .get(createOpenMeteoDailyWeatherForecastRequestParams())
         .map { it.toDomainModel() }
 
-    private fun LocalDate.oneDayBackAndForth(): Iterable<LocalDate> = listOf(
-        minusDays(1), this, plusDays(1)
-    )
+    private fun createOpenMeteoDailyWeatherForecastRequestParams(): OpenMeteo.DailyWeatherForecastRequestParams {
+        val now = LocalDate.now()
+        return OpenMeteo.DailyWeatherForecastRequestParams(
+            latitude = 37.5139F,
+            longitude = 126.9828F,
+            startDate = now.minusDays(1),
+            endDate = now.plusDays(1),
+        )
+    }
 
-    private fun WeatherInfoRemoteDataSource.Dto.toDomainModel() = WeatherInfo(
-        yesterdayMinTemperature = Temperature.fromCelsius(0F),
-        yesterdayMaxTemperature = Temperature.fromCelsius(10F),
-        todayMinTemperature = Temperature.fromCelsius(0F),
-        todayMaxTemperature = Temperature.fromCelsius(10F),
-        tomorrowMinTemperature = Temperature.fromCelsius(0F),
-        tomorrowMaxTemperature = Temperature.fromCelsius(10F),
+    private fun OpenMeteo.DailyWeatherForecastResponseDto.toDomainModel() = WeatherInfo(
+        yesterdayMinTemperature = daily?.apparentTemperatureMin?.get(0)?.let(Temperature::fromCelsius),
+        yesterdayMaxTemperature = daily?.apparentTemperatureMax?.get(0)?.let(Temperature::fromCelsius),
+        todayMinTemperature = daily?.apparentTemperatureMin?.get(1)?.let(Temperature::fromCelsius),
+        todayMaxTemperature = daily?.apparentTemperatureMax?.get(1)?.let(Temperature::fromCelsius),
+        tomorrowMinTemperature = daily?.apparentTemperatureMin?.get(2)?.let(Temperature::fromCelsius),
+        tomorrowMaxTemperature = daily?.apparentTemperatureMax?.get(2)?.let(Temperature::fromCelsius),
         rainfallProbability = Probability.orNull(0.5F),
     )
 
