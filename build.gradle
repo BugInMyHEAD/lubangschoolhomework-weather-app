@@ -3,6 +3,7 @@ buildscript {
 		kotlinVersion = '1.7.10'
 		agpVersion = '7.2.1'
 		hiltVersion = '2.44'
+		retrofit2Version = '2.9.0'
 	}
 }
 
