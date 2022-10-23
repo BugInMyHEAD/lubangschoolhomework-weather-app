@@ -5,13 +5,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
-import com.buginmyhead.lubangschoolhomework.weather.data.weatherinfo.WeatherInfoRemoteDataSourceDummyImpl
 import com.buginmyhead.lubangschoolhomework.weather.data.weatherinfo.ThreeDayWeatherInfoRepositoryImpl
 import com.buginmyhead.lubangschoolhomework.weather.architecture.ViewController
 import com.buginmyhead.lubangschoolhomework.weather.architecture.ViewState
 import com.buginmyhead.lubangschoolhomework.weather.data.weatherinfo.OpenMeteo
-import com.buginmyhead.lubangschoolhomework.weather.domain.weatherinfo.RefreshWeatherInfoUseCase
-import com.buginmyhead.lubangschoolhomework.weather.domain.weatherinfo.RefreshWeatherInfoUseCaseImpl
+import com.buginmyhead.lubangschoolhomework.weather.domain.weatherinfo.RefreshMainWeatherInfoUseCase
+import com.buginmyhead.lubangschoolhomework.weather.domain.weatherinfo.RefreshMainWeatherInfoUseCaseImpl
 import com.buginmyhead.lubangschoolhomework.weather.domain.weatherinfo.ThreeDayWeatherInfo
 import com.buginmyhead.lubangschoolhomework.weather.domain.weatherinfo.WeatherInfoFailure
 import com.buginmyhead.lubangschoolhomework.weather.domain.weatherinfo.WeatherInfoLoading
@@ -23,7 +22,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val refreshWeatherInfoUseCase: RefreshWeatherInfoUseCase,
+    private val refreshMainWeatherInfoUseCase: RefreshMainWeatherInfoUseCase,
     private val threeDayWeatherInfoOutput: Observable<ViewState<ThreeDayWeatherInfo, WeatherInfoLoading, WeatherInfoFailure>>,
 ) : ViewModel() {
 
@@ -47,7 +46,7 @@ class MainViewModel @Inject constructor(
     }
 
     fun refreshWeatherInfo() {
-        refreshWeatherInfoUseCase()
+        refreshMainWeatherInfoUseCase()
     }
 
     companion object {
@@ -55,7 +54,7 @@ class MainViewModel @Inject constructor(
         private val threeDayWeatherInfoViewController: ViewController<ThreeDayWeatherInfo, WeatherInfoLoading, WeatherInfoFailure> =
             MainWeatherInfoViewControllerImpl()
 
-        private val refreshWeatherInfoUseCase: RefreshWeatherInfoUseCase = RefreshWeatherInfoUseCaseImpl(
+        private val refreshMainWeatherInfoUseCase: RefreshMainWeatherInfoUseCase = RefreshMainWeatherInfoUseCaseImpl(
             threeDayWeatherInfoRepository = ThreeDayWeatherInfoRepositoryImpl(
                 openMeteoRemoteDataSource = OpenMeteo.RemoteDataSourceImpl
             ),
@@ -65,7 +64,7 @@ class MainViewModel @Inject constructor(
         val factory = viewModelFactory {
             initializer {
                 MainViewModel(
-                    refreshWeatherInfoUseCase = refreshWeatherInfoUseCase,
+                    refreshMainWeatherInfoUseCase = refreshMainWeatherInfoUseCase,
                     threeDayWeatherInfoOutput = threeDayWeatherInfoViewController.output,
                 )
             }

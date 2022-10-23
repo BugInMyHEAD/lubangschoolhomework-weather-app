@@ -4,8 +4,8 @@ import com.buginmyhead.lubangschoolhomework.weather.architecture.ReadOnlyReposit
 import com.buginmyhead.lubangschoolhomework.weather.architecture.ViewController
 import com.buginmyhead.lubangschoolhomework.weather.data.weatherinfo.OpenMeteo
 import com.buginmyhead.lubangschoolhomework.weather.data.weatherinfo.ThreeDayWeatherInfoRepositoryImpl
-import com.buginmyhead.lubangschoolhomework.weather.domain.weatherinfo.RefreshWeatherInfoUseCase
-import com.buginmyhead.lubangschoolhomework.weather.domain.weatherinfo.RefreshWeatherInfoUseCaseImpl
+import com.buginmyhead.lubangschoolhomework.weather.domain.weatherinfo.RefreshMainWeatherInfoUseCase
+import com.buginmyhead.lubangschoolhomework.weather.domain.weatherinfo.RefreshMainWeatherInfoUseCaseImpl
 import com.buginmyhead.lubangschoolhomework.weather.domain.weatherinfo.ThreeDayWeatherInfo
 import com.buginmyhead.lubangschoolhomework.weather.domain.weatherinfo.WeatherInfoFailure
 import com.buginmyhead.lubangschoolhomework.weather.domain.weatherinfo.WeatherInfoLoading
@@ -19,7 +19,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-interface ThreeDayWeatherInfoModuleBinder {
+interface WeatherInfoModuleBinder {
 
     @Binds
     @Singleton
@@ -36,8 +36,8 @@ interface ThreeDayWeatherInfoModuleBinder {
     @Binds
     @Singleton
     fun bindRefreshWeatherInfoUseCase(
-        impl: RefreshWeatherInfoUseCaseImpl
-    ): RefreshWeatherInfoUseCase
+        impl: RefreshMainWeatherInfoUseCaseImpl
+    ): RefreshMainWeatherInfoUseCase
 
 }
 

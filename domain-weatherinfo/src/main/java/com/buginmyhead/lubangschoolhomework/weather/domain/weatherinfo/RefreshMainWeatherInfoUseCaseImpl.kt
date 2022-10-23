@@ -7,10 +7,10 @@ import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.schedulers.Schedulers
 import javax.inject.Inject
 
-class RefreshWeatherInfoUseCaseImpl @Inject constructor(
+class RefreshMainWeatherInfoUseCaseImpl @Inject constructor(
     private val threeDayWeatherInfoRepository: ReadOnlyRepository<ThreeDayWeatherInfo>,
     private val viewController: ViewController<ThreeDayWeatherInfo, WeatherInfoLoading, WeatherInfoFailure>
-) : RefreshWeatherInfoUseCase {
+) : RefreshMainWeatherInfoUseCase {
 
     override fun invoke() {
         threeDayWeatherInfoRepository.value

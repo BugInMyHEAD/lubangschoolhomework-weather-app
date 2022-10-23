@@ -15,7 +15,7 @@ import io.reactivex.rxjava3.core.Observable
 
 @Module
 @InstallIn(ViewModelComponent::class)
-object WeatherInfoModuleViewModelProvider {
+object MainUiModuleProvider {
 
     @Provides
     @ViewModelScoped

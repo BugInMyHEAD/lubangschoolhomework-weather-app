@@ -17,11 +17,11 @@ class RefreshThreeDayWeatherInfoUseCaseImplTest {
     private val threeDayWeatherInfoRepository: ReadOnlyRepository<ThreeDayWeatherInfo> = mockk()
     private val viewController: ViewController<ThreeDayWeatherInfo, WeatherInfoLoading, WeatherInfoFailure> = mockk(relaxUnitFun = true)
 
-    private lateinit var refreshWeatherInfoUseCase: RefreshWeatherInfoUseCase
+    private lateinit var refreshMainWeatherInfoUseCase: RefreshMainWeatherInfoUseCase
 
     @Before
     fun setUp() {
-        refreshWeatherInfoUseCase = RefreshWeatherInfoUseCaseImpl(
+        refreshMainWeatherInfoUseCase = RefreshMainWeatherInfoUseCaseImpl(
             threeDayWeatherInfoRepository = threeDayWeatherInfoRepository,
             viewController = viewController,
         )
@@ -37,7 +37,7 @@ class RefreshThreeDayWeatherInfoUseCaseImplTest {
         val threeDayWeatherInfo = ThreeDayWeatherInfo()
         every { threeDayWeatherInfoRepository.value } returns Single.just(threeDayWeatherInfo)
 
-        refreshWeatherInfoUseCase()
+        refreshMainWeatherInfoUseCase()
 
         verifyOrder {
             viewController.switchToLoading(WeatherInfoLoading)
@@ -49,7 +49,7 @@ class RefreshThreeDayWeatherInfoUseCaseImplTest {
     fun `verify failure`() {
         every { threeDayWeatherInfoRepository.value } returns Single.error(Exception())
 
-        refreshWeatherInfoUseCase()
+        refreshMainWeatherInfoUseCase()
 
         verifyOrder {
             viewController.switchToLoading(WeatherInfoLoading)
