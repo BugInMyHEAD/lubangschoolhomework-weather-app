@@ -3,7 +3,7 @@ package com.buginmyhead.lubangschoolhomework.weather.domain.weatherinfo
 import com.buginmyhead.lubangschoolhomework.weather.fundamental.Probability
 import com.buginmyhead.lubangschoolhomework.weather.fundamental.Temperature
 
-data class WeatherInfo(
+data class ThreeDayWeatherInfo(
     val yesterdayMinTemperature: Temperature? = null,
     val yesterdayMaxTemperature: Temperature? = null,
     val todayMinTemperature: Temperature? = null,

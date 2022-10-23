@@ -8,20 +8,20 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 import javax.inject.Inject
 
 class RefreshWeatherInfoUseCaseImpl @Inject constructor(
-    private val weatherInfoRepository: ReadOnlyRepository<WeatherInfo>,
-    private val viewController: ViewController<WeatherInfo, WeatherInfoLoading, WeatherInfoFailure>
+    private val threeDayWeatherInfoRepository: ReadOnlyRepository<ThreeDayWeatherInfo>,
+    private val viewController: ViewController<ThreeDayWeatherInfo, WeatherInfoLoading, WeatherInfoFailure>
 ) : RefreshWeatherInfoUseCase {
 
     override fun invoke() {
-        weatherInfoRepository.value
+        threeDayWeatherInfoRepository.value
             .observeOn(Schedulers.io())
-            .subscribe(object : SingleObserver<WeatherInfo> {
+            .subscribe(object : SingleObserver<ThreeDayWeatherInfo> {
 
                 override fun onSubscribe(d: Disposable) {
                     viewController.switchToLoading(WeatherInfoLoading)
                 }
 
-                override fun onSuccess(t: WeatherInfo) {
+                override fun onSuccess(t: ThreeDayWeatherInfo) {
                     viewController.switchToSuccess(t)
                 }
 

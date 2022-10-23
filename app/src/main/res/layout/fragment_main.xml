@@ -7,13 +7,13 @@
 
     <data>
 
-        <import type="com.buginmyhead.lubangschoolhomework.weather.domain.weatherinfo.WeatherInfo" />
+        <import type="com.buginmyhead.lubangschoolhomework.weather.domain.weatherinfo.ThreeDayWeatherInfo" />
         <import type="com.buginmyhead.lubangschoolhomework.weather.domain.weatherinfo.WeatherInfoLoading" />
         <import type="com.buginmyhead.lubangschoolhomework.weather.domain.weatherinfo.WeatherInfoFailure" />
 
         <variable
             name="weatherInfo"
-            type="WeatherInfo"
+            type="ThreeDayWeatherInfo"
             />
 
         <variable

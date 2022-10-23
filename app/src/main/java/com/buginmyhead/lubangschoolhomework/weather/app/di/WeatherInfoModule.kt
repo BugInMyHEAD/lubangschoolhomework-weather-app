@@ -5,13 +5,13 @@ import com.buginmyhead.lubangschoolhomework.weather.architecture.ViewController
 import com.buginmyhead.lubangschoolhomework.weather.architecture.ViewState
 import com.buginmyhead.lubangschoolhomework.weather.data.weatherinfo.WeatherInfoRemoteDataSource
 import com.buginmyhead.lubangschoolhomework.weather.data.weatherinfo.WeatherInfoRemoteDataSourceDummyImpl
-import com.buginmyhead.lubangschoolhomework.weather.data.weatherinfo.WeatherInfoRepositoryImpl
+import com.buginmyhead.lubangschoolhomework.weather.data.weatherinfo.ThreeDayWeatherInfoRepositoryImpl
 import com.buginmyhead.lubangschoolhomework.weather.domain.weatherinfo.RefreshWeatherInfoUseCase
 import com.buginmyhead.lubangschoolhomework.weather.domain.weatherinfo.RefreshWeatherInfoUseCaseImpl
-import com.buginmyhead.lubangschoolhomework.weather.domain.weatherinfo.WeatherInfo
+import com.buginmyhead.lubangschoolhomework.weather.domain.weatherinfo.ThreeDayWeatherInfo
 import com.buginmyhead.lubangschoolhomework.weather.domain.weatherinfo.WeatherInfoFailure
 import com.buginmyhead.lubangschoolhomework.weather.domain.weatherinfo.WeatherInfoLoading
-import com.buginmyhead.lubangschoolhomework.weather.domain.weatherinfo.WeatherInfoViewControllerImpl
+import com.buginmyhead.lubangschoolhomework.weather.domain.weatherinfo.MainWeatherInfoViewControllerImpl
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -29,14 +29,14 @@ interface WeatherInfoModuleBinder {
     @Binds
     @Singleton
     fun bindWeatherInfoRepository(
-        impl: WeatherInfoRepositoryImpl
-    ): ReadOnlyRepository<WeatherInfo>
+        impl: ThreeDayWeatherInfoRepositoryImpl
+    ): ReadOnlyRepository<ThreeDayWeatherInfo>
 
     @Binds
     @Singleton
     fun bindWeatherInfoViewController(
-        impl: WeatherInfoViewControllerImpl
-    ): ViewController<WeatherInfo, WeatherInfoLoading, WeatherInfoFailure>
+        impl: MainWeatherInfoViewControllerImpl
+    ): ViewController<ThreeDayWeatherInfo, WeatherInfoLoading, WeatherInfoFailure>
 
     @Binds
     @Singleton
@@ -63,8 +63,8 @@ object WeatherInfoModuleViewModelProvider {
     @Provides
     @ViewModelScoped
     fun provideWeatherInfoOutput(
-        viewController: ViewController<WeatherInfo, WeatherInfoLoading, WeatherInfoFailure>
-    ): Observable<ViewState<WeatherInfo, WeatherInfoLoading, WeatherInfoFailure>> =
+        viewController: ViewController<ThreeDayWeatherInfo, WeatherInfoLoading, WeatherInfoFailure>
+    ): Observable<ViewState<ThreeDayWeatherInfo, WeatherInfoLoading, WeatherInfoFailure>> =
         viewController.output
 
 }

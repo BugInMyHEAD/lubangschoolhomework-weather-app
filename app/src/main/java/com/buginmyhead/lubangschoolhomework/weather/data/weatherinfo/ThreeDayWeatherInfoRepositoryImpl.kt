@@ -1,18 +1,18 @@
 package com.buginmyhead.lubangschoolhomework.weather.data.weatherinfo
 
 import com.buginmyhead.lubangschoolhomework.weather.architecture.ReadOnlyRepository
-import com.buginmyhead.lubangschoolhomework.weather.domain.weatherinfo.WeatherInfo
+import com.buginmyhead.lubangschoolhomework.weather.domain.weatherinfo.ThreeDayWeatherInfo
 import com.buginmyhead.lubangschoolhomework.weather.fundamental.Probability
 import com.buginmyhead.lubangschoolhomework.weather.fundamental.Temperature
 import io.reactivex.rxjava3.core.Single
 import java.time.LocalDate
 import javax.inject.Inject
 
-class WeatherInfoRepositoryImpl @Inject constructor(
+class ThreeDayWeatherInfoRepositoryImpl @Inject constructor(
     private val remoteDataSource: WeatherInfoRemoteDataSource
-) : ReadOnlyRepository<WeatherInfo> {
+) : ReadOnlyRepository<ThreeDayWeatherInfo> {
 
-    override val value: Single<WeatherInfo> get() = OpenMeteo.RemoteDataSource
+    override val value: Single<ThreeDayWeatherInfo> get() = OpenMeteo.RemoteDataSource
         .get(createOpenMeteoDailyWeatherForecastRequestParams())
         .map { it.toDomainModel() }
 
@@ -26,7 +26,7 @@ class WeatherInfoRepositoryImpl @Inject constructor(
         )
     }
 
-    private fun OpenMeteo.DailyWeatherForecastResponseDto.toDomainModel() = WeatherInfo(
+    private fun OpenMeteo.DailyWeatherForecastResponseDto.toDomainModel() = ThreeDayWeatherInfo(
         yesterdayMinTemperature = daily?.apparentTemperatureMin?.get(0)?.let(Temperature::fromCelsius),
         yesterdayMaxTemperature = daily?.apparentTemperatureMax?.get(0)?.let(Temperature::fromCelsius),
         todayMinTemperature = daily?.apparentTemperatureMin?.get(1)?.let(Temperature::fromCelsius),

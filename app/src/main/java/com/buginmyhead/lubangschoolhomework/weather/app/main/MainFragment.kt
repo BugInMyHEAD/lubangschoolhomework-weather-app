@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.buginmyhead.lubangschoolhomework.weather.app.databinding.FragmentMainBinding
 import com.buginmyhead.lubangschoolhomework.weather.architecture.ViewState
-import com.buginmyhead.lubangschoolhomework.weather.domain.weatherinfo.WeatherInfo
+import com.buginmyhead.lubangschoolhomework.weather.domain.weatherinfo.ThreeDayWeatherInfo
 import com.buginmyhead.lubangschoolhomework.weather.domain.weatherinfo.WeatherInfoFailure
 import com.buginmyhead.lubangschoolhomework.weather.domain.weatherinfo.WeatherInfoLoading
 import dagger.hilt.android.AndroidEntryPoint
@@ -29,9 +29,9 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val viewStatePresenter = object : ViewState.Presenter<WeatherInfo, WeatherInfoLoading, WeatherInfoFailure> {
+        val viewStatePresenter = object : ViewState.Presenter<ThreeDayWeatherInfo, WeatherInfoLoading, WeatherInfoFailure> {
 
-            override fun onSuccess(data: WeatherInfo) {
+            override fun onSuccess(data: ThreeDayWeatherInfo) {
                 binding.message.text = data.toString()
             }
 
@@ -44,7 +44,7 @@ class MainFragment : Fragment() {
             }
 
         }
-        viewModel.weatherInfoLiveData.observe(viewLifecycleOwner) {
+        viewModel.threeDayWeatherInfoLiveData.observe(viewLifecycleOwner) {
             it.showState(viewStatePresenter)
         }
 

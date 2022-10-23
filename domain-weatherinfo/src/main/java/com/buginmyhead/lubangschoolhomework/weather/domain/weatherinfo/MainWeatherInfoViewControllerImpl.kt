@@ -6,9 +6,9 @@ import io.reactivex.rxjava3.subjects.BehaviorSubject
 import io.reactivex.rxjava3.subjects.Subject
 import javax.inject.Inject
 
-class WeatherInfoViewControllerImpl @Inject constructor(
-) : AbstractViewController<WeatherInfo, WeatherInfoLoading, WeatherInfoFailure>() {
+class MainWeatherInfoViewControllerImpl @Inject constructor(
+) : AbstractViewController<ThreeDayWeatherInfo, WeatherInfoLoading, WeatherInfoFailure>() {
 
-    override val output: Subject<ViewState<WeatherInfo, WeatherInfoLoading, WeatherInfoFailure>> = BehaviorSubject.create()
+    override val output: Subject<ViewState<ThreeDayWeatherInfo, WeatherInfoLoading, WeatherInfoFailure>> = BehaviorSubject.create()
 
 }

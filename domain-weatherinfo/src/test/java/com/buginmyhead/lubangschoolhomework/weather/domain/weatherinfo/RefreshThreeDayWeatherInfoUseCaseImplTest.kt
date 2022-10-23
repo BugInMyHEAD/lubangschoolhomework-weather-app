@@ -12,17 +12,17 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Test
 
-class RefreshWeatherInfoUseCaseImplTest {
+class RefreshThreeDayWeatherInfoUseCaseImplTest {
 
-    private val weatherInfoRepository: ReadOnlyRepository<WeatherInfo> = mockk()
-    private val viewController: ViewController<WeatherInfo, WeatherInfoLoading, WeatherInfoFailure> = mockk(relaxUnitFun = true)
+    private val threeDayWeatherInfoRepository: ReadOnlyRepository<ThreeDayWeatherInfo> = mockk()
+    private val viewController: ViewController<ThreeDayWeatherInfo, WeatherInfoLoading, WeatherInfoFailure> = mockk(relaxUnitFun = true)
 
     private lateinit var refreshWeatherInfoUseCase: RefreshWeatherInfoUseCase
 
     @Before
     fun setUp() {
         refreshWeatherInfoUseCase = RefreshWeatherInfoUseCaseImpl(
-            weatherInfoRepository = weatherInfoRepository,
+            threeDayWeatherInfoRepository = threeDayWeatherInfoRepository,
             viewController = viewController,
         )
     }
@@ -34,20 +34,20 @@ class RefreshWeatherInfoUseCaseImplTest {
 
     @Test
     fun `verify success`() {
-        val weatherInfo = WeatherInfo()
-        every { weatherInfoRepository.value } returns Single.just(weatherInfo)
+        val threeDayWeatherInfo = ThreeDayWeatherInfo()
+        every { threeDayWeatherInfoRepository.value } returns Single.just(threeDayWeatherInfo)
 
         refreshWeatherInfoUseCase()
 
         verifyOrder {
             viewController.switchToLoading(WeatherInfoLoading)
-            viewController.switchToSuccess(weatherInfo)
+            viewController.switchToSuccess(threeDayWeatherInfo)
         }
     }
 
     @Test
     fun `verify failure`() {
-        every { weatherInfoRepository.value } returns Single.error(Exception())
+        every { threeDayWeatherInfoRepository.value } returns Single.error(Exception())
 
         refreshWeatherInfoUseCase()
 

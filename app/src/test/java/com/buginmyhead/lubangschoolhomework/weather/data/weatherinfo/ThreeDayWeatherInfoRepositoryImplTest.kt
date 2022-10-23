@@ -1,7 +1,7 @@
 package com.buginmyhead.lubangschoolhomework.weather.data.weatherinfo
 
 import com.buginmyhead.lubangschoolhomework.weather.architecture.ReadOnlyRepository
-import com.buginmyhead.lubangschoolhomework.weather.domain.weatherinfo.WeatherInfo
+import com.buginmyhead.lubangschoolhomework.weather.domain.weatherinfo.ThreeDayWeatherInfo
 import com.buginmyhead.lubangschoolhomework.weather.fundamental.Probability
 import com.buginmyhead.lubangschoolhomework.weather.fundamental.Temperature
 import io.mockk.clearAllMocks
@@ -12,15 +12,15 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Test
 
-class WeatherInfoRepositoryImplTest {
+class ThreeDayWeatherInfoRepositoryImplTest {
 
     private val remoteDataSource: WeatherInfoRemoteDataSource = mockk()
 
-    private lateinit var weatherInfoRepository: ReadOnlyRepository<WeatherInfo>
+    private lateinit var threeDayWeatherInfoRepository: ReadOnlyRepository<ThreeDayWeatherInfo>
 
     @Before
     fun setUp() {
-        weatherInfoRepository = WeatherInfoRepositoryImpl(
+        threeDayWeatherInfoRepository = ThreeDayWeatherInfoRepositoryImpl(
             remoteDataSource = remoteDataSource,
         )
     }
@@ -39,9 +39,9 @@ class WeatherInfoRepositoryImplTest {
             )
         } returns Single.just(WeatherInfoRemoteDataSource.Dto())
 
-        val testObserver = weatherInfoRepository.value.test()
+        val testObserver = threeDayWeatherInfoRepository.value.test()
 
-        testObserver.assertValue(WeatherInfo(
+        testObserver.assertValue(ThreeDayWeatherInfo(
             yesterdayMinTemperature = Temperature.fromCelsius(0F),
             yesterdayMaxTemperature = Temperature.fromCelsius(10F),
             todayMinTemperature = Temperature.fromCelsius(0F),
