@@ -3,6 +3,7 @@ package com.buginmyhead.lubangschoolhomework.weather.app.di
 import com.buginmyhead.lubangschoolhomework.weather.architecture.ReadOnlyRepository
 import com.buginmyhead.lubangschoolhomework.weather.architecture.ViewController
 import com.buginmyhead.lubangschoolhomework.weather.architecture.ViewState
+import com.buginmyhead.lubangschoolhomework.weather.data.weatherinfo.OpenMeteo
 import com.buginmyhead.lubangschoolhomework.weather.data.weatherinfo.WeatherInfoRemoteDataSource
 import com.buginmyhead.lubangschoolhomework.weather.data.weatherinfo.WeatherInfoRemoteDataSourceDummyImpl
 import com.buginmyhead.lubangschoolhomework.weather.data.weatherinfo.ThreeDayWeatherInfoRepositoryImpl
@@ -24,17 +25,17 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-interface WeatherInfoModuleBinder {
+interface ThreeDayWeatherInfoModuleBinder {
 
     @Binds
     @Singleton
-    fun bindWeatherInfoRepository(
+    fun bindThreeDayWeatherInfoRepository(
         impl: ThreeDayWeatherInfoRepositoryImpl
     ): ReadOnlyRepository<ThreeDayWeatherInfo>
 
     @Binds
     @Singleton
-    fun bindWeatherInfoViewController(
+    fun bindMainWeatherInfoViewController(
         impl: MainWeatherInfoViewControllerImpl
     ): ViewController<ThreeDayWeatherInfo, WeatherInfoLoading, WeatherInfoFailure>
 
@@ -52,7 +53,7 @@ object WeatherInfoModuleProvider {
 
     @Provides
     @Singleton
-    fun provideWeatherInfoRemoteDataSource(): WeatherInfoRemoteDataSource = WeatherInfoRemoteDataSourceDummyImpl
+    fun provideOpenMeteoRemoteDataSource(): OpenMeteo.RemoteDataSource = OpenMeteo.RemoteDataSourceImpl
 
 }
 

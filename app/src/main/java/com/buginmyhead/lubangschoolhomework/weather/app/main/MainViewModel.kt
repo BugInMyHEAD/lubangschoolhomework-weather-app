@@ -9,6 +9,7 @@ import com.buginmyhead.lubangschoolhomework.weather.data.weatherinfo.WeatherInfo
 import com.buginmyhead.lubangschoolhomework.weather.data.weatherinfo.ThreeDayWeatherInfoRepositoryImpl
 import com.buginmyhead.lubangschoolhomework.weather.architecture.ViewController
 import com.buginmyhead.lubangschoolhomework.weather.architecture.ViewState
+import com.buginmyhead.lubangschoolhomework.weather.data.weatherinfo.OpenMeteo
 import com.buginmyhead.lubangschoolhomework.weather.domain.weatherinfo.RefreshWeatherInfoUseCase
 import com.buginmyhead.lubangschoolhomework.weather.domain.weatherinfo.RefreshWeatherInfoUseCaseImpl
 import com.buginmyhead.lubangschoolhomework.weather.domain.weatherinfo.ThreeDayWeatherInfo
@@ -56,7 +57,7 @@ class MainViewModel @Inject constructor(
 
         private val refreshWeatherInfoUseCase: RefreshWeatherInfoUseCase = RefreshWeatherInfoUseCaseImpl(
             threeDayWeatherInfoRepository = ThreeDayWeatherInfoRepositoryImpl(
-                remoteDataSource = WeatherInfoRemoteDataSourceDummyImpl
+                openMeteoRemoteDataSource = OpenMeteo.RemoteDataSourceImpl
             ),
             viewController = threeDayWeatherInfoViewController,
         )

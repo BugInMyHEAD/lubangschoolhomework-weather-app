@@ -2,17 +2,18 @@ package com.buginmyhead.lubangschoolhomework.weather.data.weatherinfo
 
 import com.buginmyhead.lubangschoolhomework.weather.architecture.ReadOnlyRepository
 import com.buginmyhead.lubangschoolhomework.weather.domain.weatherinfo.ThreeDayWeatherInfo
-import com.buginmyhead.lubangschoolhomework.weather.fundamental.Probability
+import com.buginmyhead.lubangschoolhomework.weather.domain.weatherinfo.WeatherInfo
+import com.buginmyhead.lubangschoolhomework.weather.fundamental.Length.Companion.millimeters
 import com.buginmyhead.lubangschoolhomework.weather.fundamental.Temperature
 import io.reactivex.rxjava3.core.Single
 import java.time.LocalDate
 import javax.inject.Inject
 
 class ThreeDayWeatherInfoRepositoryImpl @Inject constructor(
-    private val remoteDataSource: WeatherInfoRemoteDataSource
+    private val openMeteoRemoteDataSource: OpenMeteo.RemoteDataSource,
 ) : ReadOnlyRepository<ThreeDayWeatherInfo> {
 
-    override val value: Single<ThreeDayWeatherInfo> get() = OpenMeteo.RemoteDataSource
+    override val value: Single<ThreeDayWeatherInfo> get() = openMeteoRemoteDataSource
         .get(createOpenMeteoDailyWeatherForecastRequestParams())
         .map { it.toDomainModel() }
 
@@ -27,13 +28,21 @@ class ThreeDayWeatherInfoRepositoryImpl @Inject constructor(
     }
 
     private fun OpenMeteo.DailyWeatherForecastResponseDto.toDomainModel() = ThreeDayWeatherInfo(
-        yesterdayMinTemperature = daily?.apparentTemperatureMin?.get(0)?.let(Temperature::fromCelsius),
-        yesterdayMaxTemperature = daily?.apparentTemperatureMax?.get(0)?.let(Temperature::fromCelsius),
-        todayMinTemperature = daily?.apparentTemperatureMin?.get(1)?.let(Temperature::fromCelsius),
-        todayMaxTemperature = daily?.apparentTemperatureMax?.get(1)?.let(Temperature::fromCelsius),
-        tomorrowMinTemperature = daily?.apparentTemperatureMin?.get(2)?.let(Temperature::fromCelsius),
-        tomorrowMaxTemperature = daily?.apparentTemperatureMax?.get(2)?.let(Temperature::fromCelsius),
-        rainfallProbability = Probability.orNull(0.5F),
+        yesterday = WeatherInfo(
+            minTemperature = daily?.apparentTemperatureMin?.get(0)?.let(Temperature::fromCelsius),
+            maxTemperature = daily?.apparentTemperatureMax?.get(0)?.let(Temperature::fromCelsius),
+            precipitationSum = daily?.precipitationSum?.get(0)?.millimeters,
+        ),
+        today = WeatherInfo(
+            minTemperature = daily?.apparentTemperatureMin?.get(1)?.let(Temperature::fromCelsius),
+            maxTemperature = daily?.apparentTemperatureMax?.get(1)?.let(Temperature::fromCelsius),
+            precipitationSum = daily?.precipitationSum?.get(1)?.millimeters,
+        ),
+        tomorrow = WeatherInfo(
+            minTemperature = daily?.apparentTemperatureMin?.get(2)?.let(Temperature::fromCelsius),
+            maxTemperature = daily?.apparentTemperatureMax?.get(2)?.let(Temperature::fromCelsius),
+            precipitationSum = daily?.precipitationSum?.get(2)?.millimeters,
+        ),
     )
 
 }

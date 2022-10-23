@@ -55,15 +55,21 @@ object OpenMeteo {
         val time: List<String> = emptyList(),
         @SerialName("weathercode")
         val weatherCode: List<Int> = emptyList(),
-        @SerialName("apparent_temperature_max")
-        val apparentTemperatureMax: List<Float> = emptyList(),
         @SerialName("apparent_temperature_min")
         val apparentTemperatureMin: List<Float> = emptyList(),
+        @SerialName("apparent_temperature_max")
+        val apparentTemperatureMax: List<Float> = emptyList(),
         @SerialName("precipitation_sum")
         val precipitationSum: List<Float> = emptyList(),
     )
 
-    object RemoteDataSource {
+    interface RemoteDataSource {
+
+        fun get(params: DailyWeatherForecastRequestParams): Single<DailyWeatherForecastResponseDto>
+
+    }
+
+    object RemoteDataSourceImpl : RemoteDataSource {
 
         private val json = Json {
             ignoreUnknownKeys = true
@@ -85,7 +91,7 @@ object OpenMeteo {
 
         }
 
-        fun get(params: DailyWeatherForecastRequestParams): Single<DailyWeatherForecastResponseDto> =
+        override fun get(params: DailyWeatherForecastRequestParams): Single<DailyWeatherForecastResponseDto> =
             dailyWeatherForecastService.get(params.paramMap)
 
     }

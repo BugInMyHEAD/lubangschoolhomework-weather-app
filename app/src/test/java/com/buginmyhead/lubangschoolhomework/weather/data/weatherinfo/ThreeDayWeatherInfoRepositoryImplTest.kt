@@ -2,7 +2,8 @@ package com.buginmyhead.lubangschoolhomework.weather.data.weatherinfo
 
 import com.buginmyhead.lubangschoolhomework.weather.architecture.ReadOnlyRepository
 import com.buginmyhead.lubangschoolhomework.weather.domain.weatherinfo.ThreeDayWeatherInfo
-import com.buginmyhead.lubangschoolhomework.weather.fundamental.Probability
+import com.buginmyhead.lubangschoolhomework.weather.domain.weatherinfo.WeatherInfo
+import com.buginmyhead.lubangschoolhomework.weather.fundamental.Length.Companion.millimeters
 import com.buginmyhead.lubangschoolhomework.weather.fundamental.Temperature
 import io.mockk.clearAllMocks
 import io.mockk.every
@@ -14,14 +15,14 @@ import org.junit.Test
 
 class ThreeDayWeatherInfoRepositoryImplTest {
 
-    private val remoteDataSource: WeatherInfoRemoteDataSource = mockk()
+    private val openMeteoRemoteDataSource: OpenMeteo.RemoteDataSource = mockk()
 
     private lateinit var threeDayWeatherInfoRepository: ReadOnlyRepository<ThreeDayWeatherInfo>
 
     @Before
     fun setUp() {
         threeDayWeatherInfoRepository = ThreeDayWeatherInfoRepositoryImpl(
-            remoteDataSource = remoteDataSource,
+            openMeteoRemoteDataSource = openMeteoRemoteDataSource,
         )
     }
 
@@ -33,22 +34,33 @@ class ThreeDayWeatherInfoRepositoryImplTest {
     @Test
     fun `verify value`() {
         every {
-            remoteDataSource.get(
-                dates = any(),
-                wgs84Coordinate = any(),
+            openMeteoRemoteDataSource.get(any())
+        } returns Single.just(OpenMeteo.DailyWeatherForecastResponseDto(
+            daily = OpenMeteo.DailyWeatherDto(
+                apparentTemperatureMin = listOf(10F, 20F, -10F),
+                apparentTemperatureMax = listOf(20F, 30F, 0F),
+                precipitationSum = listOf(0F, 20F, 10F)
             )
-        } returns Single.just(WeatherInfoRemoteDataSource.Dto())
+        ))
 
         val testObserver = threeDayWeatherInfoRepository.value.test()
 
         testObserver.assertValue(ThreeDayWeatherInfo(
-            yesterdayMinTemperature = Temperature.fromCelsius(0F),
-            yesterdayMaxTemperature = Temperature.fromCelsius(10F),
-            todayMinTemperature = Temperature.fromCelsius(0F),
-            todayMaxTemperature = Temperature.fromCelsius(10F),
-            tomorrowMinTemperature = Temperature.fromCelsius(0F),
-            tomorrowMaxTemperature = Temperature.fromCelsius(10F),
-            rainfallProbability = Probability.orNull(0.5F),
+            yesterday = WeatherInfo(
+                minTemperature = Temperature.fromCelsius(10F),
+                maxTemperature = Temperature.fromCelsius(20F),
+                precipitationSum = 0F.millimeters,
+            ),
+            today = WeatherInfo(
+                minTemperature = Temperature.fromCelsius(20F),
+                maxTemperature = Temperature.fromCelsius(30F),
+                precipitationSum = 20F.millimeters,
+            ),
+            tomorrow = WeatherInfo(
+                minTemperature = Temperature.fromCelsius(-10F),
+                maxTemperature = Temperature.fromCelsius(0F),
+                precipitationSum = 10F.millimeters,
+            ),
         ))
     }
 
