@@ -29,19 +29,19 @@ class ThreeDayWeatherInfoRepositoryImpl @Inject constructor(
 
     private fun OpenMeteo.DailyWeatherForecastResponseDto.toDomainModel() = ThreeDayWeatherInfo(
         yesterday = WeatherInfo(
-            minTemperature = daily?.apparentTemperatureMin?.get(0)?.let(Temperature::fromCelsius),
-            maxTemperature = daily?.apparentTemperatureMax?.get(0)?.let(Temperature::fromCelsius),
-            precipitationSum = daily?.precipitationSum?.get(0)?.millimeters,
+            minTemperature = daily!!.apparentTemperatureMin[0].let(Temperature::fromCelsius),
+            maxTemperature = daily.apparentTemperatureMax[0].let(Temperature::fromCelsius),
+            precipitationSum = daily.precipitationSum[0].millimeters,
         ),
         today = WeatherInfo(
-            minTemperature = daily?.apparentTemperatureMin?.get(1)?.let(Temperature::fromCelsius),
-            maxTemperature = daily?.apparentTemperatureMax?.get(1)?.let(Temperature::fromCelsius),
-            precipitationSum = daily?.precipitationSum?.get(1)?.millimeters,
+            minTemperature = daily.apparentTemperatureMin[1].let(Temperature::fromCelsius),
+            maxTemperature = daily.apparentTemperatureMax[1].let(Temperature::fromCelsius),
+            precipitationSum = daily.precipitationSum[1].millimeters,
         ),
         tomorrow = WeatherInfo(
-            minTemperature = daily?.apparentTemperatureMin?.get(2)?.let(Temperature::fromCelsius),
-            maxTemperature = daily?.apparentTemperatureMax?.get(2)?.let(Temperature::fromCelsius),
-            precipitationSum = daily?.precipitationSum?.get(2)?.millimeters,
+            minTemperature = daily.apparentTemperatureMin[2].let(Temperature::fromCelsius),
+            maxTemperature = daily.apparentTemperatureMax[2].let(Temperature::fromCelsius),
+            precipitationSum = daily.precipitationSum[2].millimeters,
         ),
     )
 

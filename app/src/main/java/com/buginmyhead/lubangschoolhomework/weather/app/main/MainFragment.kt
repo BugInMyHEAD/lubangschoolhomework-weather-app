@@ -11,6 +11,7 @@ import com.buginmyhead.lubangschoolhomework.weather.architecture.ViewState
 import com.buginmyhead.lubangschoolhomework.weather.domain.weatherinfo.ThreeDayWeatherInfo
 import com.buginmyhead.lubangschoolhomework.weather.domain.weatherinfo.WeatherInfoFailure
 import com.buginmyhead.lubangschoolhomework.weather.domain.weatherinfo.WeatherInfoLoading
+import com.buginmyhead.lubangschoolhomework.weather.domain.weatherinfo.comparison.ThreeDayWeatherInfoComparison
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -32,15 +33,15 @@ class MainFragment : Fragment() {
         val viewStatePresenter = object : ViewState.Presenter<ThreeDayWeatherInfo, WeatherInfoLoading, WeatherInfoFailure> {
 
             override fun onSuccess(data: ThreeDayWeatherInfo) {
-                binding.message.text = data.toString()
+                binding.message.text = ThreeDayWeatherInfoComparison.from(data).toString()
             }
 
             override fun onLoading(data: WeatherInfoLoading) {
-                binding.message.text = data.toString()
+                binding.message.text = "Loading"
             }
 
             override fun onFailure(data: WeatherInfoFailure) {
-                binding.message.text = data.toString()
+                binding.message.text = "Failure"
             }
 
         }
