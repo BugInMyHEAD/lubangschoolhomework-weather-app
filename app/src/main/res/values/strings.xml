@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Weather</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="three_day_weather_info_widget_description">Three Day Weather</string>
 </resources>

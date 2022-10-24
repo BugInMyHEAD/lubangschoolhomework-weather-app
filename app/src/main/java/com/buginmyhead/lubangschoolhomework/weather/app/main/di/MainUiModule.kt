@@ -17,11 +17,4 @@ import io.reactivex.rxjava3.core.Observable
 @InstallIn(ViewModelComponent::class)
 object MainUiModuleProvider {
 
-    @Provides
-    @ViewModelScoped
-    fun provideWeatherInfoOutput(
-        viewController: ViewController<ThreeDayWeatherInfo, WeatherInfoLoading, WeatherInfoFailure>
-    ): Observable<ViewState<ThreeDayWeatherInfo, WeatherInfoLoading, WeatherInfoFailure>> =
-        viewController.output
-
 }
