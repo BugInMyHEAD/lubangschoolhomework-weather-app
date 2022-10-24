@@ -1,5 +1,16 @@
 <resources>
+
     <string name="app_name">Weather</string>
-    <string name="appwidget_text">EXAMPLE</string>
+
+    <string name="weather_info_loading">Loading</string>
+    <string name="weather_info_failure">Failure</string>
+
+    <string name="colder_than_before">Colder than yesterday</string>
+    <string name="cooler_than_before">Cooler than yesterday</string>
+    <string name="similar_to_each_other">Similar to yesterday</string>
+    <string name="warmer_than_before">Warmer than yesterday</string>
+    <string name="hotter_than_before">Hotter than yesterday</string>
+
     <string name="three_day_weather_info_widget_description">Three Day Weather</string>
+
 </resources>

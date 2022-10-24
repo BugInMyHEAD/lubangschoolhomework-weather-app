@@ -30,6 +30,7 @@ class ThreeDayWeatherInfoWidgetProvider : AppWidgetProvider() {
     @Inject
     internal lateinit var weatherInfoOutput: Observable<ViewState<ThreeDayWeatherInfo, WeatherInfoLoading, WeatherInfoFailure>>
 
+
     override fun onUpdate(context: Context, appWidgetManager: AppWidgetManager, appWidgetIds: IntArray) {
         goAsync()
         refreshMainWeatherInfoUseCase()
@@ -39,6 +40,8 @@ class ThreeDayWeatherInfoWidgetProvider : AppWidgetProvider() {
     }
 
     private fun updateAppWidget(context: Context, appWidgetManager: AppWidgetManager, appWidgetId: Int) {
+        val fromResources = FromResources(context)
+
         weatherInfoOutput.blockingSubscribe {
 
             val views = RemoteViews(context.packageName, R.layout.three_day_weather_info_widget)
@@ -46,7 +49,10 @@ class ThreeDayWeatherInfoWidgetProvider : AppWidgetProvider() {
             val viewStatePresenter = object : ViewState.Presenter<ThreeDayWeatherInfo, WeatherInfoLoading, WeatherInfoFailure> {
 
                 override fun onSuccess(data: ThreeDayWeatherInfo) {
-                    views.setTextViewText(R.id.appwidget_text, ThreeDayWeatherInfoComparison.from(data).toString())
+                    views.setTextViewText(
+                        R.id.appwidget_text,
+                        fromResources.getStringBy(ThreeDayWeatherInfoComparison.from(data).yesterdayAndToday)
+                    )
                 }
 
                 override fun onLoading(data: WeatherInfoLoading) {

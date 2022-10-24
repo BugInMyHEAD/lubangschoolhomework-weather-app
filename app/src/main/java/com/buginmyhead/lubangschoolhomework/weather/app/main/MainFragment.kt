@@ -1,11 +1,13 @@
 package com.buginmyhead.lubangschoolhomework.weather.app.main
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.buginmyhead.lubangschoolhomework.weather.app.FromResources
+import com.buginmyhead.lubangschoolhomework.weather.app.R
 import com.buginmyhead.lubangschoolhomework.weather.app.databinding.FragmentMainBinding
 import com.buginmyhead.lubangschoolhomework.weather.architecture.ViewState
 import com.buginmyhead.lubangschoolhomework.weather.domain.weatherinfo.ThreeDayWeatherInfo
@@ -22,6 +24,8 @@ class MainFragment : Fragment() {
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
 
+    private val fromResources by lazy { FromResources(resources) }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentMainBinding.inflate(inflater, container, false)
         return binding.root
@@ -33,15 +37,15 @@ class MainFragment : Fragment() {
         val viewStatePresenter = object : ViewState.Presenter<ThreeDayWeatherInfo, WeatherInfoLoading, WeatherInfoFailure> {
 
             override fun onSuccess(data: ThreeDayWeatherInfo) {
-                binding.message.text = ThreeDayWeatherInfoComparison.from(data).toString()
+                binding.message.text = fromResources.getStringBy(ThreeDayWeatherInfoComparison.from(data).yesterdayAndToday)
             }
 
             override fun onLoading(data: WeatherInfoLoading) {
-                binding.message.text = "Loading"
+                binding.message.text = getString(R.string.weather_info_loading)
             }
 
             override fun onFailure(data: WeatherInfoFailure) {
-                binding.message.text = "Failure"
+                binding.message.text = getString(R.string.weather_info_failure)
             }
 
         }
